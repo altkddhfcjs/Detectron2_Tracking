@@ -1,0 +1,41 @@
+
+MODEL:
+  META_ARCHITECTURE: "RCNN_MOT"
+  #BACKBONE:
+  #  NAME: "build_p35_fcos_dla_bifpn_backbone"
+  #BIFPN:
+  #  OUT_CHANNELS: 160
+  #  NUM_LEVELS: 3
+  #  NUM_BIFPN: 4
+  #DLA:
+  #  NUM_LAYERS: 34
+  #  NORM: "SyncBN"
+  #FPN:
+  #  IN_FEATURES: ["dla3", "dla4", "dla5"]
+  RPN:
+  #  IN_FEATURES: ['p3', 'p4', 'p5']
+    PRE_NMS_TOPK_TEST: 6000
+    POST_NMS_TOPK_TEST: 1000
+  ROI_HEADS:
+    NAME: "roi_tracking"
+  #  IN_FEATURES: ["p3", "p4", "p5"]
+  ROI_BOX_HEAD:
+    NAME: "FastRCNNConvFCHead"
+    NUM_FC: 2
+    POOLER_RESOLUTION: 7
+    CLS_AGNOSTIC_BBOX_REG: True
+  #MULT_PROPOSAL_SCORE: True
+  #BACKBONE:
+  #  NAME: "build_dla_backbone"
+DATASETS:
+  TRAIN: ("coco_2017_train",)
+  TEST: ("coco_2017_val",)
+  #PROPOSAL_FILES_TRAIN: "../CenterNet2/datasets/coco/annotations/instances_train2017.json"
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.02
+  STEPS: (60000, 80000)
+  MAX_ITER: 90000
+INPUT:
+  MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+VERSION: 2
