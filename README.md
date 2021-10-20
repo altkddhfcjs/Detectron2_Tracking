@@ -1,6 +1,5 @@
 # Detectron2_Tracking
-private project
 
-Detectron2 + Tracking project
+Detectron2 + Tracker(SiamMOT)
 
 Tracking Model: SiamTracking (https://github.com/amazon-research/siam-mot)
